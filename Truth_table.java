@@ -1,19 +1,40 @@
 import java.util.Arrays;
 import java.util.Random;
 
-public class Prob_sim_new {
+public class Truth_table {
     int[][] arr;
     public static void main(String[] args) {
 
-        Prob_sim_new p = new Prob_sim_new();
-        for (double i = 0; i < 1; i += 0.05) {
-            p.simulation(i, 0, 0);
-        }
+        Truth_table p = new Truth_table();
+//        for (double i = 0; i < 1; i += 0.05) {
+//            p.simulation(i, 0, 0);
+//        }
 /*        for (double i = 0; i < 1; i += 0.05) {
             for (double j = 0; j < 1; j += 0.05) {
                 p.simulation(-0.2, i, j);
             }
         }*/
+//        p.arr = new int[7][8];
+//        p.truth_table_helper(new int[8], 0);
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print("" + Character.toString(j + 'A') + i + ",");
+            }
+        }
+
+    }
+
+    void truth_table_helper(int[] origin, int index) {
+        if (index == 8) {
+            update(origin, true);
+            return;
+        }
+
+        origin[index] = 0;
+        truth_table_helper(origin, index + 1);
+        origin[index] = 1;
+        truth_table_helper(origin, index + 1);
     }
 
     boolean[][] count;
@@ -65,7 +86,7 @@ public class Prob_sim_new {
     }
 
     void get_all_conditions() {
-        Prob_sim_new m = new Prob_sim_new();
+        Truth_table m = new Truth_table();
         m.helper_first(new int[8], 0);
     }
 
@@ -73,7 +94,7 @@ public class Prob_sim_new {
     void helper_first(int[] origin, int start) {
         if (start == 8) {
             initiate(origin);
-            System.out.println(Arrays.toString(origin) + ":");
+//            System.out.println(Arrays.toString(origin) + ":");
             first_num = convert(origin);
             helper_second(new int[8], 0);
             return;
@@ -101,7 +122,7 @@ public class Prob_sim_new {
                     return;
                 t = t >> 2;
             }
-            System.out.println("\t" + Arrays.toString(second) + "   ---   " + sum);
+//            System.out.println("\t" + Arrays.toString(second) + "   ---   " + sum);
 //            System.out.print("{" + first_num + "," + convert(second) + "," + sum + "},");
             return;
         }
@@ -196,6 +217,26 @@ public class Prob_sim_new {
 //        copy
         if (update)
             arr[index] = Arrays.copyOf(next, 8);
+
+//        for (int i = 0; i < 8; i++) {
+//            System.out.print(next[i] + ",");
+//        }
+//        if (index == 6)
+//            System.out.println();
+
+        for (int i = 4; i < 8; i++) {
+            if (next[i] != 0)
+                return sum;
+        }
+        if (index >= 5)
+            return sum;
+        if (index == 4) {
+            System.out.println();
+            return sum;
+        }
+        for (int i = 0; i < 4; i++) {
+            System.out.print(next[i] + ",");
+        }
 
 /*        sum = 0;
         for (int i = 0; i < 8; i++) {

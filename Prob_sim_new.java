@@ -6,9 +6,10 @@ public class Prob_sim_new {
     public static void main(String[] args) {
 
         Prob_sim_new p = new Prob_sim_new();
-        for (double i = 0; i < 1; i += 0.05) {
-            p.simulation(i, 0, 0);
-        }
+        p.get_all_conditions();
+//        for (double i = 0; i < 1; i += 0.05) {
+//            p.simulation(i, 0, 0);
+//        }
 /*        for (double i = 0; i < 1; i += 0.05) {
             for (double j = 0; j < 1; j += 0.05) {
                 p.simulation(-0.2, i, j);
